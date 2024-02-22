@@ -5,22 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:System_Programing_Cretical_Sections_Homework5"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="1100">
+        Title="MainWindow" Height="450" Width="1100" Background="DimGray">
     <Grid>
-        <Label Content="Working Threads" FontFamily="STENCIL" FontSize="18" VerticalAlignment="Top" Margin="100 50 0 0" HorizontalAlignment="Left" Height="40" Width="200"/>
-        <ListView Visibility="Visible" HorizontalAlignment="Left" x:Name="items" ItemsSource="{Binding WorkingThreads,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Width="300" Height="250" Margin="50 0 0 0" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Grid.RowSpan="2" Background="LightGray">
+        <Label Content="Working Threads" FontFamily="STENCIL" FontSize="18" VerticalAlignment="Top" Margin="100 20 0 0" HorizontalAlignment="Left" Height="40" Width="200"/>
+        <ListView Visibility="Visible" HorizontalAlignment="Left" x:Name="items" ItemsSource="{Binding WorkingThreads,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Width="300" Height="250" Margin="50 -50 0 0" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Grid.RowSpan="2" Background="LightGray" MouseDoubleClick="DeleteThreadsFromWorkingThreads">
             <ListView.ItemTemplate>
                 <DataTemplate>
 
-                    <Label Content="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  FontSize="18" Margin="20 -10 0 0" Foreground="Black"/>
+                    <Label Content="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  FontSize="18"  Foreground="Black"/>
 
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
 
-        <Label Content="Waiting Threads" FontFamily="STENCIL" FontSize="18" VerticalAlignment="Top" Margin="0 50 0 0" HorizontalAlignment="Center" Height="40" Width="200"/>
+        <Label Content="Waiting Threads" FontFamily="STENCIL" FontSize="18" VerticalAlignment="Top" Margin="0 20 0 0" HorizontalAlignment="Center" Height="40" Width="200"/>
 
-        <ListView Visibility="Visible" x:Name="items2" ItemsSource="{Binding WaitingThreads,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Width="300" Height="250" Margin="20 0 0 0" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Grid.RowSpan="2" Background="LightGray">
+        <ListView Visibility="Visible" x:Name="items2" ItemsSource="{Binding WaitingThreads,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Width="300" Height="250" Margin="20 -50 0 0" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Grid.RowSpan="2" Background="LightGray">
 
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -31,15 +31,17 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <Label Content="Created Threads" FontFamily="STENCIL" FontSize="18" VerticalAlignment="Top" Margin="0 50 100 0" HorizontalAlignment="Right" Height="40" Width="200"/>
-        <ListView Visibility="Visible" x:Name="items3" ItemsSource="{Binding NewThreads,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right"  Width="300" Height="250" Margin="0 0 40 0" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Grid.RowSpan="2" Background="LightGray" MouseDoubleClick="SendNewThreadsForWaitingThreads">
+        <Label Content="Created Threads" FontFamily="STENCIL" FontSize="18" VerticalAlignment="Top" Margin="0 20 100 0" HorizontalAlignment="Right" Height="40" Width="200"/>
+        <ListView Visibility="Visible" x:Name="items3" ItemsSource="{Binding NewThreads,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right"  Width="300" Height="250" Margin="0 -50 40 0" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Grid.RowSpan="2" Background="LightGray" MouseDoubleClick="SendNewThreadsForWaitingThreads">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Label Content="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  FontSize="18" Foreground="Black"/>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Button Content="CReate New" FontFamily="STENCIL" FontSize="18" VerticalAlignment="Bottom" Margin="0 0 40 20" HorizontalAlignment="Right" Height="40" Width="150" Click="CreatingNewThread"/>
+        <Button Content="CReate New" FontFamily="STENCIL" FontSize="18" VerticalAlignment="Bottom" Margin="0 0 40 30" HorizontalAlignment="Right" Height="40" Width="150" Click="CreatingNewThread"/>
 
+        <Label Content="Place in Semophone" FontFamily="STENCIL" FontSize="16" VerticalAlignment="Bottom" Margin="80 0 0 50" HorizontalAlignment="Left" Height="40" Width="200" Foreground="Black"/>
+        <TextBox Name="textBox" Text="{Binding Text,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Height="40" Width="250" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="50 0 0 20" HorizontalContentAlignment="Center" FontSize="18"/>
     </Grid>
 </Window>
