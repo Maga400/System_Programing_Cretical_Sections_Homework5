@@ -19,7 +19,7 @@ namespace System_Programing_Cretical_Sections_Homework5
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window,INotifyPropertyChanged
+    public partial class MainWindow : Window, INotifyPropertyChanged
     {
         public ObservableCollection<Thread> NewThreads { get; set; }
         public ObservableCollection<Thread> WaitingThreads { get; set; }
@@ -47,7 +47,7 @@ namespace System_Programing_Cretical_Sections_Homework5
             NewThreads = new ObservableCollection<Thread>();
             WaitingThreads = new ObservableCollection<Thread>();
             WorkingThreads = new ObservableCollection<Thread>();
-            Semaphore = new Semaphore(2, 2, "Semaphore");
+
 
             DataContext = this;
         }
@@ -58,18 +58,15 @@ namespace System_Programing_Cretical_Sections_Homework5
             {
                 var th = obj as Thread;
                 Dispatcher dispatcher = Dispatcher;
-                int value = Convert.ToInt32(text);
-                Semaphore = new Semaphore(value,value, "Semaphore");
-                
-                Thread.Sleep(1000);
+
+
                 Semaphore.WaitOne();
-                dispatcher.Invoke(() =>
-                {
+                Thread.Sleep(1000);
+                App.Current.Dispatcher.Invoke(() => { WaitingThreads.Remove(th!); });
+                Thread.Sleep(500);
+                App.Current.Dispatcher.Invoke(() => { WorkingThreads.Add(th!); });
+                Thread.Sleep(1000);
 
-                    WorkingThreads.Add(th!);
-                    WaitingThreads.Remove(th);
-
-                });
                 Semaphore.Release();
 
                 // news  silinib wait dushmelidi
@@ -90,8 +87,9 @@ namespace System_Programing_Cretical_Sections_Homework5
             });
 
             thread.Name = "Thread " + thread.ManagedThreadId;
+            App.Current.Dispatcher.Invoke(() => { NewThreads.Add(thread); });
 
-            NewThreads.Add(thread);
+
         }
 
         private void SendNewThreadsForWaitingThreads(object sender, MouseButtonEventArgs e)
@@ -100,8 +98,20 @@ namespace System_Programing_Cretical_Sections_Homework5
             var th = items3.SelectedItem as Thread;
             if (th != null)
             {
-                NewThreads.Remove(th);
-                WaitingThreads.Add(th);
+                int value = Convert.ToInt32(text);
+                if (value == 0)
+                {
+                    MessageBox.Show("Semaphore ucun places yeni value daxil edin", "INFO", MessageBoxButton.OK, MessageBoxImage.Information);
+                    return;
+                }
+                else
+                {
+                    Semaphore = new Semaphore(value, value, "Semaphore");
+
+                }
+                App.Current.Dispatcher.Invoke(() => { NewThreads.Remove(th); ; });
+                App.Current.Dispatcher.Invoke(() => { WaitingThreads.Add(th); });
+
                 th.Start(th);
                 //Semaphore.WaitOne();
                 //WorkingThreads.Add(th);
@@ -116,7 +126,7 @@ namespace System_Programing_Cretical_Sections_Homework5
         private void DeleteThreadsFromWorkingThreads(object sender, MouseButtonEventArgs e)
         {
             var th = items.SelectedItem as Thread;
-            WorkingThreads.Remove(th);
+            WorkingThreads.Remove(th!);
         }
     }
 }

@@ -42,6 +42,6 @@
         <Button Content="CReate New" FontFamily="STENCIL" FontSize="18" VerticalAlignment="Bottom" Margin="0 0 40 30" HorizontalAlignment="Right" Height="40" Width="150" Click="CreatingNewThread"/>
 
         <Label Content="Place in Semophone" FontFamily="STENCIL" FontSize="16" VerticalAlignment="Bottom" Margin="80 0 0 50" HorizontalAlignment="Left" Height="40" Width="200" Foreground="Black"/>
-        <TextBox Name="textBox" Text="{Binding Text,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Height="40" Width="250" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="50 0 0 20" HorizontalContentAlignment="Center" FontSize="18"/>
+        <TextBox Name="textBox" Text="{Binding Text,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Height="40" Width="250" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="50 0 0 20" Padding="10 0 0 0" VerticalContentAlignment="Center" FontSize="18"/>
     </Grid>
 </Window>
